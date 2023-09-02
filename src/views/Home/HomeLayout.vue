@@ -1,5 +1,6 @@
 <template>
   <Banner />
+  <ScrollDownButton />
   <div class="rooms-intro-area container">
     <RoomCard v-for="room in rooms" :key="room.id" :room="room" />
   </div>
@@ -9,6 +10,7 @@
 import { ref } from 'vue'
 import Banner from '@/views/Home/Banner.vue'
 import RoomCard from '@/components/RoomCard.vue'
+import ScrollDownButton from '@/components/ScrollDownButton.vue'
 import demo from './demo'
 import type { Room } from '@/types/room'
 
