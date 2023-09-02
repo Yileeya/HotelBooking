@@ -10,11 +10,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/Home/HomeLayout.vue')
       }
     ]
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/Login/Login.vue')
   }
 ]
 export default routes
