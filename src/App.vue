@@ -1,9 +1,11 @@
 <template>
   <RouterView />
+  <FooterView />
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { RouterView } from 'vue-router'
+import FooterView from '@/components/FooterView.vue'
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>
