@@ -1,5 +1,5 @@
 <template>
-  <div class="room-card">
+  <div class="room-card" @click.prevent="changeRouterPath">
     <div class="image-container">
       <img :src="room.imageUrl" :alt="room.name" />
     </div>
@@ -9,9 +9,14 @@
 
 <script setup lang="ts">
 import type { Room } from '@/types/room'
-defineProps<{
+import { useRouter } from 'vue-router'
+const props = defineProps<{
   room: Room
 }>()
+const router = useRouter()
+const changeRouterPath = () => {
+  router.push(`/room/${props.room.id}`)
+}
 </script>
 
 <style scoped lang="scss">

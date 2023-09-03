@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Banner from '@/views/Home/Banner.vue'
-import RoomCard from '@/components/RoomCard.vue'
+import RoomCard from '@/views/Home/RoomCard.vue'
 import ScrollDownButton from '@/components/ScrollDownButton.vue'
 import type { Room } from '@/types/room'
 import { getAllRoomsApi } from '@/apis/rooms'
