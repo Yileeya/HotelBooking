@@ -43,7 +43,10 @@
 
 <script setup lang="ts">
 defineProps({
-  imageUrl: Array<string>
+  imageUrl: {
+    type: Array as () => Array<string>,
+    default: () => []
+  }
 })
 </script>
 
