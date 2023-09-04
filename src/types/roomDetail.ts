@@ -27,16 +27,14 @@ interface DescriptionShort {
     'Private-Bath': number
 }
 
-interface RoomDetail {
+interface RoomDetails {
     'id': string
     'name': string
-    'amenities': Amenities
     'checkInAndOut': CheckInAndOut
     'description': string
     'descriptionShort': DescriptionShort
     'normalDayPrice': number
     'holidayPrice': number
-    'imageUrl': Array<string>
 }
 
-export type {Amenities, CheckInAndOut, DescriptionShort, RoomDetail};
+export type {Amenities, CheckInAndOut, DescriptionShort, RoomDetails};

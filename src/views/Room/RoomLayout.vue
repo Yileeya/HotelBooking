@@ -5,16 +5,16 @@
   <section v-if="room">
     <CarouselView :image-url="room.imageUrl" />
     <div style="width: 50%; padding: 30px">
-      <IntroductionView v-if="roomDetailData" :room-detail="roomDetailData" />
+      <IntroductionView :room-details="room.roomDetails" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-import type { RoomDetail } from '@/types/roomDetail'
+import type { RoomDetails, Amenities } from '@/types/roomDetail'
 import { getSingleRoomApi } from '@/apis/rooms'
 import CarouselView from '@/views/Room/CarouselView.vue'
 import IntroductionView from '@/views/Room/IntroductionView.vue'
@@ -25,23 +25,28 @@ const route = useRoute()
 const router = useRouter()
 const routeParamsId = route.params.id.toString()
 
-const room = ref<RoomDetail | null>(null)
+interface Room {
+  roomDetails: RoomDetails
+  imageUrl: Array<string>
+  amenities: Amenities
+}
+
+const room = ref<Room | null>(null)
 const fetchSingleRoomApi = async () => {
   try {
     let res = await getSingleRoomApi(routeParamsId)
     if (res.status === 200) {
-      room.value = res.data.room[0]
+      const { imageUrl, amenities, ...roomDetails } = res.data.room[0]
+      room.value = {
+        imageUrl: imageUrl,
+        amenities: amenities,
+        roomDetails: roomDetails
+      }
     }
   } catch (error) {
     Toast.error('資料獲取錯誤，請稍後再試。')
   }
 }
-
-const roomDetailData = computed(() => {
-  if (!room.value) return null
-  const { imageUrl, amenities, ...roomDetail } = room.value
-  return roomDetail
-})
 
 fetchSingleRoomApi()
 </script>
