@@ -1,16 +1,17 @@
 interface Amenities {
-    'Air-Conditioner': Boolean
-    'Breakfast': Boolean
-    'Child-Friendly': Boolean
-    'Great-View': Boolean
-    'Mini-Bar': Boolean
-    'Pet-Friendly': Boolean
-    'Refrigerator': Boolean
-    'Room-Service': Boolean
-    'Smoke-Free': Boolean
-    'Sofa': Boolean
-    'Television': Boolean
-    'Wi-Fi': Boolean
+    'Air-Conditioner': boolean
+    'Breakfast': boolean
+    'Child-Friendly': boolean
+    'Great-View': boolean
+    'Mini-Bar': boolean
+    'Pet-Friendly': boolean
+    'Refrigerator': boolean
+    'Room-Service': boolean
+    'Smoke-Free': boolean
+    'Sofa': boolean
+    'Television': boolean
+    'Wi-Fi': boolean
+    [key: string]: boolean
 }
 
 interface CheckInAndOut {

@@ -6,6 +6,7 @@
     <CarouselView :image-url="room.imageUrl" />
     <div style="width: 50%; padding: 30px">
       <IntroductionView :room-details="room.roomDetails" />
+      <amenities-view :amenities="room.amenities" />
     </div>
   </section>
 </template>
@@ -18,6 +19,7 @@ import type { RoomDetails, Amenities } from '@/types/roomDetail'
 import { getSingleRoomApi } from '@/apis/rooms'
 import CarouselView from '@/views/Room/CarouselView.vue'
 import IntroductionView from '@/views/Room/IntroductionView.vue'
+import AmenitiesView from '@/views/Room/AmenitiesView.vue'
 
 const Toast = useToast()
 
