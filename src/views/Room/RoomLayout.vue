@@ -5,7 +5,7 @@
   <section v-if="room">
     <CarouselView :image-url="room.imageUrl" />
     <div style="width: 50%; padding: 30px">
-      <IntroductionView :room-detail="roomDetailData" />
+      <IntroductionView v-if="roomDetailData" :room-detail="roomDetailData" />
     </div>
   </section>
 </template>
