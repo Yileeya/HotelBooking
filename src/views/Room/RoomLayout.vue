@@ -2,11 +2,13 @@
   <header>
     <img src="@/assets/img/icon.svg" alt="icon" @click.prevent="router.push('/')" />
   </header>
-  <section v-if="room">
-    <CarouselView :image-url="room.imageUrl" />
-    <div style="width: 50%; padding: 30px">
-      <IntroductionView :room-details="room.roomDetails" />
-      <amenities-view :amenities="room.amenities" />
+  <section v-if="!loading">
+    <CarouselView :image-url="bookingRoomStore.imageUrls" />
+    <div style="display: flex">
+      <div style="flex: 1; padding: 30px">
+        <IntroductionView :room-details="bookingRoomStore.roomDetails" />
+        <amenities-view :amenities="bookingRoomStore.amenities" />
+      </div>
     </div>
   </section>
 </template>
@@ -14,40 +16,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useToast } from 'vue-toastification'
-import type { RoomDetails, Amenities } from '@/types/roomDetail'
-import { getSingleRoomApi } from '@/apis/rooms'
+import { useBookingRoomStore } from '@/stores/bookingRoom'
 import CarouselView from '@/views/Room/CarouselView.vue'
 import IntroductionView from '@/views/Room/IntroductionView.vue'
 import AmenitiesView from '@/views/Room/AmenitiesView.vue'
 
-const Toast = useToast()
+const loading = ref(true)
 
 const route = useRoute()
 const router = useRouter()
 const routeParamsId = route.params.id.toString()
 
-interface Room {
-  roomDetails: RoomDetails
-  imageUrl: Array<string>
-  amenities: Amenities
-}
+//獲取房間資料
+const bookingRoomStore = useBookingRoomStore()
 
-const room = ref<Room | null>(null)
 const fetchSingleRoomApi = async () => {
-  try {
-    let res = await getSingleRoomApi(routeParamsId)
-    if (res.status === 200) {
-      const { imageUrl, amenities, ...roomDetails } = res.data.room[0]
-      room.value = {
-        imageUrl: imageUrl,
-        amenities: amenities,
-        roomDetails: roomDetails
-      }
-    }
-  } catch (error) {
-    Toast.error('資料獲取錯誤，請稍後再試。')
-  }
+  loading.value = true
+  await bookingRoomStore.fetchSingleRoomApi(routeParamsId)
+  loading.value = false
 }
 
 fetchSingleRoomApi()
