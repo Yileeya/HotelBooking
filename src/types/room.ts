@@ -1,7 +1,5 @@
-export interface Room {
-  id: string
+export interface IRoom {
+  _id: string
   imageUrl: string
-  normalDayPrice: number
-  holidayPrice: number
   name: string
 }

@@ -8,15 +8,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Room } from '@/types/room'
-import { useRouter } from 'vue-router'
+import type { IRoom } from '@/types/room';
+import { useRouter } from 'vue-router';
+
 const props = defineProps<{
-  room: Room
-}>()
-const router = useRouter()
+  room: IRoom;
+}>();
+
+const router = useRouter();
 const changeRouterPath = () => {
-  router.push(`/room/${props.room.id}`)
-}
+  router.push(`/room/${props.room._id}`);
+};
 </script>
 
 <style scoped lang="scss">
@@ -36,6 +38,7 @@ const changeRouterPath = () => {
     img {
       width: 100%;
       height: 100%;
+      min-height: 250px;
       object-fit: cover;
       transition: transform 0.3s ease;
 
