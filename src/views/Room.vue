@@ -1,4 +1,7 @@
 <template>
+  <header>
+    <img src="@/assets/img/icon.svg" alt="icon" @click.prevent="router.push('/')" />
+  </header>
   <Carousel :image-urls="roomStore.imageUrlList" />
   <section class="room-detail-container">
     <Introduction class="introduction" :room-details="roomStore.roomDetail" />
@@ -12,6 +15,7 @@ import { useRoomStore } from '@/stores/bookingRoom';
 import Carousel from '@/components/Room/Carousel.vue';
 import Introduction from '@/components/Room/Introduction.vue';
 import FacilityInformation from '@/components/Room/FacilityInformation.vue';
+import router from '@/router';
 
 const route = useRoute();
 const routeParamsId = route.params.id.toString();
@@ -38,6 +42,7 @@ header {
 .room-detail-container {
   max-width: 992px;
   margin: auto;
+
   .introduction {
     margin: 2rem 0;
   }
