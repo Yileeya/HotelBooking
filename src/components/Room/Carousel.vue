@@ -2,7 +2,7 @@
   <div id="carousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button
-        v-for="indicatorIndex in imageUrl.length"
+        v-for="indicatorIndex in imageUrls.length"
         :key="'indicator' + indicatorIndex"
         type="button"
         data-bs-target="#carousel"
@@ -14,7 +14,7 @@
     <div class="carousel-inner">
       <div
         class="carousel-item"
-        v-for="(img, index) in imageUrl"
+        v-for="(img, index) in imageUrls"
         :key="'img' + img"
         :class="[{ active: index === 0 }]"
         @click.prevent="showMultiple(index)"
@@ -42,30 +42,32 @@
   </div>
   <vue-easy-lightbox
     :visible="visibleRef"
-    :imgs="imageUrl"
+    :imgs="imageUrls"
     :index="indexRef"
     @hide="visibleRef = false"
-  ></vue-easy-lightbox>
+  />
 </template>
 
 <script setup lang="ts">
-import 'vue-easy-lightbox/external-css/vue-easy-lightbox.css'
-import VueEasyLightbox from 'vue-easy-lightbox'
-import { ref } from 'vue'
+import 'vue-easy-lightbox/external-css/vue-easy-lightbox.css';
+import VueEasyLightbox from 'vue-easy-lightbox';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 
-defineProps({
-  imageUrl: {
-    type: Array as () => Array<string>,
-    default: () => []
-  }
-})
-const visibleRef = ref(false)
-const indexRef = ref(0) // default 0
-
-const showMultiple = (imgIndex: number) => {
-  indexRef.value = imgIndex //圖片順序
-  visibleRef.value = true
+interface Props {
+  imageUrls: string[];
 }
+withDefaults(defineProps<Props>(), {
+  imageUrls: () => []
+});
+
+const visibleRef: Ref<boolean> = ref(false);
+const indexRef: Ref<number> = ref(0); // default 0
+
+const showMultiple = (imgIndex: number): void => {
+  indexRef.value = imgIndex; // 圖片順序
+  visibleRef.value = true;
+};
 </script>
 
 <style scoped lang="scss">
@@ -97,6 +99,7 @@ $gray: #74797c;
     margin: -8px 0;
   }
 }
+
 .vel-modal {
   background: rgba(0, 0, 0, 0.9);
 }
