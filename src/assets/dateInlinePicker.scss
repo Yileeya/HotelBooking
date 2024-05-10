@@ -1,0 +1,63 @@
+@import '@vuepic/vue-datepicker/dist/main.css';
+
+.dp__theme_light {
+  font-family: 'Andale Mono', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+  --dp-text-color: var(--primary-color);
+  --dp-menu-border-color: transparent;
+  --dp-primary-color: var(--primary-color);
+  --dp-hover-color: var(--primary-color);
+  --dp-hover-text-color: white;
+  --dp-hover-icon-color: white;
+  --dp-range-between-dates-background-color: var(--primary-color);
+  --dp-range-between-dates-text-color: white;
+  --dp-cell-border-radius: 25px;
+  --dp-row-margin: 20px 0;
+  --dp-menu-padding: 0;
+
+  .dp--header-wrap {
+    margin-bottom: 10px;
+    .dp__month_year_select,
+    .dp__month_year_select {
+      pointer-events: none;
+      &:first-child {
+        justify-content: flex-end;
+      }
+      &:last-child {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  .dp__calendar {
+    background: #f8f8f8;
+  }
+
+  .dp__calendar_header {
+    font-weight: normal;
+    padding-top: 25px;
+  }
+
+  .dp__calendar_header_separator {
+    display: none;
+  }
+
+  .dp__cell_inner {
+    height: 25px;
+    width: 42px;
+    border: none;
+
+    &.dp__cell_disabled:hover {
+      color: var(--primary-color);
+      background-color: #eeeeee;
+    }
+  }
+
+  .dp__cell_inner.dp__cell_disabled.dp__range_between {
+    background-color: #eeeeee;
+  }
+
+  .dp__calendar_row:last-child {
+    padding-bottom: 25px;
+  }
+}
