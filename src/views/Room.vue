@@ -24,6 +24,7 @@
           </p>
         </div>
       </div>
+      <reservation-form />
     </section>
   </section>
 </template>
@@ -39,6 +40,7 @@ import FacilityInformation from '@/components/Room/FacilityInformation.vue';
 import DateRangePicker from '@/components/DateRangePicker.vue';
 import { priceAddCommas } from '@/utils/priceAddCommas';
 import { calculateDaysPrice } from '@/utils/daysControlMehods';
+import ReservationForm from '@/components/Room/ReservationForm.vue';
 
 const route = useRoute();
 const routeParamsId = route.params.id.toString();
@@ -99,11 +101,15 @@ header {
     margin: 2rem 0;
   }
 }
+
 .order-area {
   display: flex;
+  gap: 60px;
   margin: 60px 0 30px;
+
   .day-price-area {
     width: 294px;
+
     .prices {
       p {
         display: flex;
@@ -113,24 +119,38 @@ header {
         &:before {
           content: attr(title);
         }
+
         &:nth-child(2) {
           margin-top: 10px;
           margin-bottom: 20px;
         }
+
         &:last-child {
           color: #273036;
         }
+
         span {
           display: flex;
           justify-content: space-between;
           gap: 5px;
           min-width: 50px;
+
           &:before {
             content: 'NT$';
           }
         }
       }
     }
+  }
+
+  .reservation-form {
+    flex: 1;
+    background: #f8f8f8;
+    padding: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 }
 </style>
