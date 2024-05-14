@@ -1,6 +1,6 @@
 <template>
   <section class="reservation-form">
-    <div>
+    <div class="main-form">
       <div class="form-group">
         <label for="name" class="form-label">Name</label>
         <input
@@ -37,23 +37,22 @@
         />
         <p v-show="errors.email" class="error-text">{{ errors.email }}</p>
       </div>
-      <div class="form-check">
-        <input
-          v-model="isAgree"
-          class="form-check-input"
-          type="checkbox"
-          value=""
-          id="invalidCheck"
-        />
-        <label class="form-check-label" for="invalidCheck">
-          Please confirm your reservation details are correct. If you have any questions or need
-          assistance, please contact our hotel service team.
-        </label>
+      <div class="people-select form-group">
+        <label class="form-label">people</label>
+        <div class="group-btn">
+          <button class="btn btn-theme" :disabled="people === 1" @click="people--">
+            <i class="fa fa-minus" />
+          </button>
+          <h5>{{ people }}</h5>
+          <button class="btn btn-theme" :disabled="people === maxPeople" @click="people++">
+            <i class="fa fa-plus" />
+          </button>
+        </div>
       </div>
     </div>
     <button
-      class="btn submit-btn"
-      :disabled="!isAgree || !meta.dirty || !meta.valid"
+      class="btn submit-btn btn-theme"
+      :disabled="!meta.dirty || !meta.valid || !isSelectDateRange"
       @click="onSubmit"
     >
       Confirm
@@ -64,9 +63,25 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
-import { ref } from 'vue';
+import type { IUserInfo } from '@/types/orders';
 
-const isAgree = ref<boolean>(false);
+withDefaults(
+  defineProps<{
+    maxPeople: number;
+    isSelectDateRange: boolean;
+  }>(),
+  {
+    maxPeople: 1,
+    isSelectDateRange: false
+  }
+);
+
+const emit = defineEmits<{
+  submit: [form: IUserInfo];
+}>();
+
+//人數
+const people = defineModel<number>('people', { default: 1 });
 
 //防呆規則
 const schema = yup.object({
@@ -92,7 +107,9 @@ const [phone, phoneAttrs] = defineField('phone');
 const [email, emailAttrs] = defineField('email');
 
 const onSubmit = handleSubmit((values) => {
-  alert(JSON.stringify(values, null, 2));
+  emit('submit', {
+    ...(values as IUserInfo)
+  });
 });
 const onResetForm = () => {
   resetForm({
@@ -106,57 +123,58 @@ const onResetForm = () => {
 </script>
 
 <style scoped lang="scss">
-.form-group {
-  position: relative;
-  margin-bottom: 30px;
+.main-form {
+  width: 100%;
 
-  label {
-    margin: 0;
-  }
+  .form-group {
+    position: relative;
+    margin-bottom: 30px;
 
-  .form-control {
-    border: none;
-    border-bottom: 1px solid;
-    border-radius: 0;
-    padding: 0.375rem 0;
-    background-color: transparent;
-
-    &:focus {
-      box-shadow: none;
+    label {
+      margin: 0;
     }
 
-    &.is-invalid {
-      border-color: var(--danger-color);
+    .form-control {
+      border: none;
+      border-bottom: 1px solid;
+      border-radius: 0;
+      padding: 0.375rem 0;
+      background-color: transparent;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &.is-invalid {
+        border-color: var(--danger-color);
+        color: var(--danger-color);
+      }
+    }
+
+    .error-text {
       color: var(--danger-color);
     }
   }
 
-  .error-text {
-    color: var(--danger-color);
-  }
-}
+  .people-select {
+    .group-btn {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
 
-.form-check {
-  font-size: 14px;
-  margin-bottom: 15px;
+      .btn-theme {
+        padding: 0;
+        width: 45px;
+        height: 30px;
+        border-radius: 30px;
+      }
 
-  .form-check-input {
-    &:checked {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
+      h5 {
+        margin: 0;
+      }
     }
-
-    &:focus {
-      box-shadow: none;
-      border-color: var(--primary-color);
-    }
   }
-}
-
-@mixin primary-btn {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  color: white;
 }
 
 .submit-btn {
@@ -164,20 +182,5 @@ const onResetForm = () => {
   width: 125px;
   height: 45px;
   box-shadow: 1px 1px 5px 0 var(--primary-color);
-  @include primary-btn;
-
-  &:disabled {
-    cursor: not-allowed;
-    pointer-events: inherit;
-  }
-
-  &:hover,
-  &:active {
-    opacity: 0.8;
-  }
-}
-
-:not(.btn-check) + .btn:active {
-  @include primary-btn;
 }
 </style>

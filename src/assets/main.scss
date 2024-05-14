@@ -2,3 +2,26 @@
 @import 'base';
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'font-awesome/css/font-awesome.min.css';
+
+@mixin primary-theme-color-btn {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-theme {
+  @include primary-theme-color-btn;
+
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: inherit;
+    @include primary-theme-color-btn;
+  }
+
+  &:hover,
+  &:active,
+  &:active:not(.btn-check) {
+    @include primary-theme-color-btn;
+    opacity: 0.8;
+  }
+}

@@ -24,7 +24,12 @@
           </p>
         </div>
       </div>
-      <reservation-form />
+      <reservation-form
+        v-model:people="peopleNumber"
+        :max-people="roomStore.roomDetail.maxPeople"
+        :is-select-date-range="!!selectDateRange.length"
+        @submit="submitForm"
+      />
     </section>
   </section>
 </template>
@@ -38,12 +43,17 @@ import Carousel from '@/components/Room/Carousel.vue';
 import Introduction from '@/components/Room/Introduction.vue';
 import FacilityInformation from '@/components/Room/FacilityInformation.vue';
 import DateRangePicker from '@/components/DateRangePicker.vue';
+import ReservationForm from '@/components/Room/ReservationForm.vue';
 import { priceAddCommas } from '@/utils/priceAddCommas';
 import { calculateDaysPrice } from '@/utils/daysControlMehods';
-import ReservationForm from '@/components/Room/ReservationForm.vue';
+import type { IUserInfo, IOrder } from '@/types/orders';
+import { postOrderApi } from '@/apis/orders';
 
 const route = useRoute();
 const routeParamsId = route.params.id.toString();
+
+const peopleNumber = ref<number>(1);
+const selectDateRange = ref<string[]>([]);
 
 //價格計算
 const prices = ref<{
@@ -64,6 +74,7 @@ roomStore.fetchRoom(routeParamsId);
 
 //計算住宿金額
 const setDaysPrice = (betweenDates: string[]) => {
+  selectDateRange.value = [...betweenDates];
   const roomPrice = calculateDaysPrice(
     betweenDates,
     roomStore.roomDetail.weekdayPrice,
@@ -76,6 +87,16 @@ const setDaysPrice = (betweenDates: string[]) => {
     const priceElement = document.getElementById('PriceTotalWidth') as HTMLElement | null;
     prices.value.width = priceElement ? priceElement.getBoundingClientRect().width : 0;
   });
+};
+
+const submitForm = async (userInfoForm: IUserInfo) => {
+  const submitForm: IOrder = {
+    roomId: routeParamsId,
+    peopleNum: peopleNumber.value,
+    userInfo: userInfoForm,
+    days: selectDateRange.value
+  };
+  await postOrderApi(submitForm);
 };
 </script>
 
@@ -111,6 +132,8 @@ header {
     width: 294px;
 
     .prices {
+      padding-bottom: 15px;
+
       p {
         display: flex;
         justify-content: space-between;
