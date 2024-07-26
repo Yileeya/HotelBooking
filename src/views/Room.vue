@@ -48,6 +48,9 @@ import { priceAddCommas } from '@/utils/priceAddCommas';
 import { calculateDaysPrice } from '@/utils/daysControlMehods';
 import type { IUserInfo, IOrder } from '@/types/orders';
 import { postOrderApi } from '@/apis/orders';
+import { useUIUXStore } from '@/stores/uiux';
+
+const uiuxStore = useUIUXStore();
 
 const route = useRoute();
 const routeParamsId = route.params.id.toString();
@@ -90,6 +93,7 @@ const setDaysPrice = (betweenDates: string[]) => {
 };
 
 const submitForm = async (userInfoForm: IUserInfo) => {
+  uiuxStore.loadingChanged(true);
   const submitForm: IOrder = {
     roomId: routeParamsId,
     peopleNum: peopleNumber.value,
@@ -97,6 +101,7 @@ const submitForm = async (userInfoForm: IUserInfo) => {
     days: selectDateRange.value
   };
   await postOrderApi(submitForm);
+  uiuxStore.loadingChanged(false);
 };
 </script>
 

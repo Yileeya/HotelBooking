@@ -14,18 +14,22 @@ import ScrollDownButton from '@/components/ScrollDownButton.vue';
 import type { IRoom } from '@/types/room';
 import { getAllRoomsApi } from '@/apis/rooms';
 import { useToast } from 'vue-toastification';
+import { useUIUXStore } from '@/stores/uiux';
 
 const Toast = useToast();
+const uiuxStore = useUIUXStore();
 
 const rooms = ref<Array<IRoom>>([]);
 
 const fetchAllRooms = async () => {
+  uiuxStore.loadingChanged(true);
   try {
     let res = await getAllRoomsApi();
     if (res.status) rooms.value = res.result;
   } catch (error) {
     Toast.error('資料獲取錯誤，請稍後再試。');
   }
+  uiuxStore.loadingChanged(false);
 };
 
 fetchAllRooms();
