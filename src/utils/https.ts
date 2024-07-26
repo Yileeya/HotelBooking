@@ -21,7 +21,7 @@ https.interceptors.response.use(
       switch (error.response.status) {
         //可以在這裡針對不同 status code 做處理
         case 400: {
-          Toast.error('資料獲取錯誤，請稍後再試。');
+          Toast.error(`${data.message || '資料獲取錯誤，請稍後再試。'}`);
           console.log(data.message);
           break;
         }

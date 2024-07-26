@@ -49,8 +49,10 @@ import { calculateDaysPrice } from '@/utils/daysControlMehods';
 import type { IUserInfo, IOrder } from '@/types/orders';
 import { postOrderApi } from '@/apis/orders';
 import { useUIUXStore } from '@/stores/uiux';
+import { useToast } from 'vue-toastification';
 
 const uiuxStore = useUIUXStore();
+const Toast = useToast();
 
 const route = useRoute();
 const routeParamsId = route.params.id.toString();
@@ -100,7 +102,14 @@ const submitForm = async (userInfoForm: IUserInfo) => {
     userInfo: userInfoForm,
     days: selectDateRange.value
   };
-  await postOrderApi(submitForm);
+  try {
+    let res = await postOrderApi(submitForm);
+    if (res.status) {
+      Toast.success('Booking successful!');
+    }
+  } catch (error) {
+    console.log(error);
+  }
   uiuxStore.loadingChanged(false);
 };
 </script>
