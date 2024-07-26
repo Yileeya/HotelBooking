@@ -32,6 +32,13 @@
       />
     </section>
   </section>
+  <reservation-modal
+    v-model="showConfirmModal"
+    :price="prices?.total"
+    :room-name="roomStore.roomDetail?.name"
+    :date-range="selectDateRange"
+    @closeModal="closeConfirmModal"
+  />
 </template>
 
 <script setup lang="ts">
@@ -44,15 +51,14 @@ import Introduction from '@/components/Room/Introduction.vue';
 import FacilityInformation from '@/components/Room/FacilityInformation.vue';
 import DateRangePicker from '@/components/DateRangePicker.vue';
 import ReservationForm from '@/components/Room/ReservationForm.vue';
+import ReservationModal from '@/components/Room/ReservationModal.vue';
 import { priceAddCommas } from '@/utils/priceAddCommas';
 import { calculateDaysPrice } from '@/utils/daysControlMehods';
 import type { IUserInfo, IOrder } from '@/types/orders';
 import { postOrderApi } from '@/apis/orders';
 import { useUIUXStore } from '@/stores/uiux';
-import { useToast } from 'vue-toastification';
 
 const uiuxStore = useUIUXStore();
-const Toast = useToast();
 
 const route = useRoute();
 const routeParamsId = route.params.id.toString();
@@ -72,6 +78,7 @@ const prices = ref<{
   total: '0',
   width: 50
 });
+const showConfirmModal = ref<boolean>(false);
 
 //獲取房間資料
 const roomStore = useRoomStore();
@@ -105,12 +112,19 @@ const submitForm = async (userInfoForm: IUserInfo) => {
   try {
     let res = await postOrderApi(submitForm);
     if (res.status) {
-      Toast.success('Booking successful!');
+      showConfirmModal.value = true;
     }
   } catch (error) {
     console.log(error);
   }
   uiuxStore.loadingChanged(false);
+};
+
+const closeConfirmModal = () => {
+  showConfirmModal.value = false;
+  setTimeout(() => {
+    router.push('/');
+  }, 500);
 };
 </script>
 
