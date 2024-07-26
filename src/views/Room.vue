@@ -115,9 +115,8 @@ const submitForm = async (userInfoForm: IUserInfo) => {
       showConfirmModal.value = true;
     }
   } catch (error) {
-    console.log(error);
+    await uiuxStore.loadingChanged(false);
   }
-  uiuxStore.loadingChanged(false);
 };
 
 const closeConfirmModal = () => {
