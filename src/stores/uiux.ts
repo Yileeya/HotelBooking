@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 export const useUIUXStore = defineStore('uiux', () => {
-  const loading = ref<boolean>(false);
+  const loading = ref<boolean>(true);
   let loadingStartTime: number | null = null;
 
   const loadingChanged = (status: boolean) => {

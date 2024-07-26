@@ -4,9 +4,11 @@ import { defineStore } from 'pinia';
 import { getSingleRoomApi } from '@/apis/rooms';
 import type { IFacility, IRoomDetail } from '@/types/roomDetail';
 import { useUIUXStore } from '@/stores/uiux';
+import { useToast } from 'vue-toastification';
 
 export const useRoomStore = defineStore('room', () => {
   const uiuxStore = useUIUXStore();
+  const Toast = useToast();
 
   const bookedDays: Ref<string[]> = ref([]);
   const imageUrlList: Ref<string[]> = ref([]);
@@ -28,7 +30,7 @@ export const useRoomStore = defineStore('room', () => {
         bookedDays.value = res.bookedDays;
       }
     } catch (error) {
-      alert('資料獲取錯誤，請稍後再試。');
+      Toast.error('資料獲取錯誤，請稍後再試。');
     }
     uiuxStore.loadingChanged(false);
   };
