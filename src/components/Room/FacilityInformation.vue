@@ -97,5 +97,11 @@ const findMatchFacilityValue = (name: string): boolean => {
     width: 1rem;
     height: 1rem;
   }
+  @media (max-width: 768px) {
+    padding: 1rem;
+    .facility {
+      flex: 0 0 50%;
+    }
+  }
 }
 </style>

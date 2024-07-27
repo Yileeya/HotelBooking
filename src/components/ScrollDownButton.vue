@@ -24,6 +24,7 @@ const scrollDown = function () {
   display: flex;
   justify-content: center;
   margin-top: -4em;
+  margin-left: -3em;
   .fa {
     animation: animate 2s infinite;
     color: white;

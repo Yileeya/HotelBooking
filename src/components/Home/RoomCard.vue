@@ -52,5 +52,12 @@ const changeRouterPath = () => {
   h4 {
     margin-top: 0.5rem;
   }
+
+  @media (max-width: 768px) {
+    .image-container {
+      width: 100%;
+      max-height: 200px;
+    }
+  }
 }
 </style>

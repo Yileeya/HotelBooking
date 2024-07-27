@@ -78,6 +78,10 @@ $gray: #74797c;
   display: flex;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 768px) {
+    max-height: 250px;
+    min-height: auto;
+  }
 }
 
 .carousel-indicators button {

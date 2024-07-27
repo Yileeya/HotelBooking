@@ -41,5 +41,12 @@ fetchAllRooms();
   gap: 2rem;
   grid-template-columns: repeat(3, 1fr);
   margin: 5rem auto 4em;
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 4rem auto 2rem;
+  }
 }
 </style>

@@ -132,7 +132,7 @@ header {
   background: transparent;
   position: fixed;
   width: 100%;
-  z-index: 9999;
+  z-index: 100;
   text-align: center;
   padding: 1rem 0;
 
@@ -147,6 +147,13 @@ header {
 
   .introduction {
     margin: 2rem 0;
+  }
+  @media (max-width: 992px) {
+    padding: 0 2rem;
+  }
+  @media (max-width: 768px) {
+    padding: 0;
+    max-width: 294px;
   }
 }
 
@@ -201,6 +208,16 @@ header {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+  }
+  @media (max-width: 768px) {
+    justify-content: center;
+    flex-wrap: wrap;
+    .day-price-area .prices {
+      padding: 0 1rem;
+    }
+    .reservation-form {
+      padding: 1rem;
+    }
   }
 }
 </style>

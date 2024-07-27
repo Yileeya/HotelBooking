@@ -22,5 +22,12 @@
       width: 30%;
     }
   }
+  @media (max-width: 768px) {
+    height: 30vh;
+    min-height: 250px;
+    .img-container img {
+      width: 60vw;
+    }
+  }
 }
 </style>

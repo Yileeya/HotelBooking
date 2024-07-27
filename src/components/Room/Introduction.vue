@@ -107,7 +107,10 @@ const introShortItemsArray = computed(() => {
 
 .check-in-and-price {
   h6 {
-    font-size: 18px;
+    font-size: 1.125rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   span::before {

@@ -85,7 +85,6 @@ const endDate = computed<string>(() => {
       }
     }
     .confirm-btn {
-      width: 25%;
       margin: 0 10px 5px;
     }
   }

@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive } from 'vue';
 
 const items = reactive([
   {
@@ -26,7 +26,7 @@ const items = reactive([
     name: 'Lauren',
     url: 'https://challenge.thef2e.com/user/2095?schedule=3863#works-3863'
   }
-])
+]);
 </script>
 
 <style scoped lang="scss">
@@ -56,6 +56,19 @@ footer {
     padding: 0 1rem;
     a {
       pointer-events: none;
+    }
+  }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+    > div {
+      &:first-child {
+        width: 100%;
+        text-align: center;
+      }
+      &:nth-child(2) {
+        border-left: none;
+      }
     }
   }
 }
