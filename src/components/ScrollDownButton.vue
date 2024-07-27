@@ -6,16 +6,16 @@
 
 <script setup>
 const scrollDown = function () {
-  const roomIntro = document.querySelector('.rooms-intro-area')
+  const roomIntro = document.querySelector('.rooms-intro-area');
   if (roomIntro) {
-    const offset = -60
-    const targetScrollPosition = roomIntro.getBoundingClientRect().top + window.scrollY + offset
+    const offset = -60;
+    const targetScrollPosition = roomIntro.getBoundingClientRect().top + window.scrollY + offset;
     window.scrollTo({
       top: targetScrollPosition,
       behavior: 'smooth'
-    })
+    });
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -24,7 +24,6 @@ const scrollDown = function () {
   display: flex;
   justify-content: center;
   margin-top: -4em;
-  margin-left: -3em;
   .fa {
     animation: animate 2s infinite;
     color: white;
@@ -34,14 +33,14 @@ const scrollDown = function () {
 @keyframes animate {
   0% {
     opacity: 0;
-    transform: rotate(0deg) translate(20px, -20px);
+    transform: rotate(0deg) translate(0, -20px);
   }
   50% {
     opacity: 1;
   }
   100% {
     opacity: 0;
-    transform: rotate(0deg) translate(20px, 20px);
+    transform: rotate(0deg) translate(0, 20px);
   }
 }
 </style>

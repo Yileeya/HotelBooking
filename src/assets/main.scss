@@ -18,10 +18,16 @@
     @include primary-theme-color-btn;
   }
 
-  &:hover,
-  &:active,
-  &:active:not(.btn-check) {
+  &:not(:disabled) {
+    &:hover,
+    &:active,
+    &:active:not(.btn-check) {
+      @include primary-theme-color-btn;
+      opacity: 0.8;
+    }
+  }
+  &:active:not(.btn-check):disabled { //移除bs的設定
     @include primary-theme-color-btn;
-    opacity: 0.8;
+    opacity: 0.65;
   }
 }
