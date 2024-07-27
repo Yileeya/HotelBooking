@@ -77,7 +77,7 @@ const findMatchFacilityValue = (name: string): boolean => {
   margin-top: 2rem;
   color: #272e31;
   background: rgba(248, 248, 248, 0.71);
-  padding: 2rem 5px;
+  padding: 2rem 1rem;
   display: flex;
   flex-wrap: wrap;
   row-gap: 10px;
