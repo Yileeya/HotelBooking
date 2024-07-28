@@ -17,6 +17,7 @@
     model-type="yyyy-MM-dd"
     :disabled-dates="disabledDays"
     @update:model-value="dateRangeChange"
+    @invalid-date="onClickInvalidDate"
   />
 </template>
 
@@ -48,5 +49,10 @@ const dateRangeChange = (modelData: string[]) => {
   if (!modelData.length) return;
   const betweenDates: string[] = generateDatesBetween(modelData);
   emit('updateBetweenDates', betweenDates);
+};
+
+const onClickInvalidDate = () => { //重置清空
+  dates.value = [];
+  emit('updateBetweenDates', []);
 };
 </script>

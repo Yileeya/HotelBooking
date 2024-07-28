@@ -86,6 +86,13 @@ roomStore.fetchRoom(routeParamsId);
 
 //計算住宿金額
 const setDaysPrice = (betweenDates: string[]) => {
+  if (!betweenDates.length) {
+    prices.value.default = '0';
+    prices.value.tax = '0';
+    prices.value.total = '0';
+    prices.value.width = 50;
+    return;
+  }
   selectDateRange.value = [...betweenDates];
   const roomPrice = calculateDaysPrice(
     betweenDates,
