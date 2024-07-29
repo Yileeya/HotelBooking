@@ -11,8 +11,8 @@
   top: 0;
   height: 100%;
   width: 100%;
-  background: rgba(71, 71, 71, 0.8);
-  z-index: 10;
+  background: rgba(71, 71, 71, 1);
+  z-index: 99;
   display: flex;
   align-items: center;
   justify-content: center;
