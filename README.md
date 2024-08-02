@@ -1,9 +1,9 @@
 # The F2E 2nd - 第六關 - 旅館預約服務
 線上網址：https://yileeya.github.io/HotelBooking
 
-![image](https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_ff118dade1a7f2362578ec9aa39756d5.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1722095693&Signature=YfASmx0KA42pTXz7oS1yp5knJ94%3D)
+![image](./public/demo_home.png)
 
-![image](https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_04dcc54f390393e081963d6498545e96.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1722095308&Signature=Pj%2Fal%2FD7gIXSYcvkXqeJ0z94H2A%3D)
+![image](./public/demo_reservation.png)
 
 ## 作品說明
 * [The F2E 2nd - 第六關 - 旅館預約服務題目](https://challenge.thef2e.com/news/17)
